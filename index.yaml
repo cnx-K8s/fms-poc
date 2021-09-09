@@ -3,12 +3,12 @@ entries:
   fms-k8s:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2021-09-09T12:09:16.0478252+05:30"
+    created: "2021-09-09T12:24:44.8127831+05:30"
     description: A Helm chart for Kubernetes
-    digest: bd0e9258c04fd654cc1613904d43c3f897263054bc17e1d5b4c8f96e0ed56f94
+    digest: 4815beb9f755053fca2ba8f8f84c97e7ad1484c519c68adc916c8dcbd8b4a83e
     name: fms-k8s
     type: application
     urls:
     - fms-k8s-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-09T12:09:16.0466835+05:30"
+generated: "2021-09-09T12:24:44.8117196+05:30"
