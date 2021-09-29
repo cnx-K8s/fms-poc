@@ -38,9 +38,9 @@ spec: # for deployment
          - containerPort: 9090
         env:
           - name: com.fms.uri 
-            value: "mongodb://cnxadmin:cnxadm1n@192.168.29.213:27017/admin?waitQueueTimeoutMS=180000&maxPoolSize=5000" 
+            value: "mongodb://admin:fms135246@10.128.0.7:27017/admin?waitQueueTimeoutMS=180000&maxPoolSize=5000" 
           - name: CATALINA_OPTS 
-            value: "-Dcom.fms.cache.address=192.168.29.213 -Dcom.fms.cache.group.name=fms_cache -Dhazelcast.application.validation.token=fms#123456" 		
+            value: "-Dcom.fms.cache.address=10.160.0.3:5701 -Dcom.fms.cache.group.name=fms_cache_cloud -Dhazelcast.application.validation.token=fms#123456" 		
 
 
 # Create the Internal Service  
