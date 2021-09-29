@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fms-app
+  labels:
+    name: fms-app
+
+# Create the Pod
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fms-mng-deploy
+  namespace: fms-app
+  labels:
+    app: fms-mng
+spec: # for deployment
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fms-mng
+  template:
+    metadata:
+      labels:
+        app: fms-mng
+    spec: # for pod
+      containers:
+      - name: fms-mng
+        image: 1017860556361/fms-managesvc:v0
+        resources: 
+          limits:
+            memory: "512Mi"  
+            cpu: "300m"
+          requests:                   # request memory can't greater than limits memory
+            memory: "256Mi"  
+            cpu: "200m"
+        ports:
+         - containerPort: 9090
+        env:
+          - name: com.fms.uri 
+            value: "mongodb://cnxadmin:cnxadm1n@192.168.29.213:27017/admin?waitQueueTimeoutMS=180000&maxPoolSize=5000" 
+          - name: CATALINA_OPTS 
+            value: "-Dcom.fms.cache.address=192.168.29.213 -Dcom.fms.cache.group.name=fms_cache -Dhazelcast.application.validation.token=fms#123456" 		
+
+
+# Create the Internal Service  
+# '---' by this syntex can create multile documants in yaml fle 
+
+---    
+apiVersion: v1
+kind: Service
+metadata:
+  name: fms-mng-svc
+  namespace: fms-app
+spec: # for deployment
+  selector:
+      app: fms-mng
+  type: LoadBalancer    
+  ports:
+     - protocol: TCP
+       port: 9090
+       targetPort: 9090
