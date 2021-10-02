@@ -9,7 +9,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /*
+      - path: /fms_manageservice/*
         pathType: ImplementationSpecific
         backend:
           service:
