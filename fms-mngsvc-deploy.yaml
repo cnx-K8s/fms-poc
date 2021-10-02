@@ -55,7 +55,7 @@ metadata:
 spec: # for deployment
   selector:
       app: fms-mng
-  type: LoadBalancer    
+  #type: LoadBalancer    
   ports:
      - protocol: TCP
        port: 9090
