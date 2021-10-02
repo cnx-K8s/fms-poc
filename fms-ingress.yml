@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fms-ingress
+  annotations:
+    kubernetes.io/ingress.class: gce
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: fms-mng-svc
+          servicePort: 9090
