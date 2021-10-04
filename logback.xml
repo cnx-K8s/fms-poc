@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<property name="log.base" value="C:/Yogesh/logs"/>
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{dd HH:mm:ss:SSS} %logger{30}:%L{4} : [%thread] %level -%msg %n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>..\fms\webservice\webservice.%d{yyyy-MM-dd_HH}.%i.log.zip</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>25MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<MaxHistory>200</MaxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{dd HH:mm:ss:SSS} %logger{30}:%L{4} : [%thread] %level -%msg %n</pattern>
+		</encoder>
+	</appender>
+	
+	<logger name="com.hazelcast" level="ERROR" additivity="false">
+		<appender-ref ref="console"></appender-ref>
+	</logger>
+	
+	<logger name="com.minacs" level="DEBUG" additivity="false">
+		<appender-ref ref="console"></appender-ref>
+	</logger>
+
+	<logger name="org.springframework.data.mongodb.core" level="INFO" additivity="false">
+		<appender-ref ref="console"></appender-ref>
+	</logger>
+
+	<root level="ERROR">
+		<appender-ref ref="console"></appender-ref>
+	</root>
+</configuration>
