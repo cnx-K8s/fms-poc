@@ -43,11 +43,11 @@ spec: # for deployment
             value: "-Dcom.fms.cache.address=10.160.0.3:5701 -Dcom.fms.cache.group.name=fms_cache_cloud -Dhazelcast.application.validation.token=fms#123456" 		
          volumeMounts:
            - name: fms-build
-	     mountPath: /etc
+             mountPath: /etc
        volumes:
-	  - name: fms-build
-	    persistentVolumeClaim:
-	     claimName: fms-pvc
+           - name: fms-build
+             persistentVolumeClaim:
+               claimName: fms-pvc
 
 # Create the Internal Service  
 # '---' by this syntex can create multile documants in yaml fle 
