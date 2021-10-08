@@ -47,7 +47,7 @@ spec: # for deployment
       volumes:
            - name: fms-build
              persistentVolumeClaim:
-               claimName: fms-pvc1
+               claimName: fileserver-claim
 
 # Create the Internal Service  
 # '---' by this syntex can create multile documants in yaml fle 
@@ -66,17 +66,3 @@ spec: # for deployment
      - protocol: TCP
        port: 9090
        targetPort: 9090
- 
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: fms-pvc1
-  namespace: fms-app
-spec:
-  resources:
-    requests:
-      storage: 2Gi
-  accessModes:
-  - ReadWriteOnce
-  storageClassName: "fms-stg-cls"
