@@ -41,7 +41,13 @@ spec: # for deployment
             value: "mongodb://admin:fms135246@10.128.0.7:27017/admin?waitQueueTimeoutMS=180000&maxPoolSize=5000" 
           - name: CATALINA_OPTS 
             value: "-Dcom.fms.cache.address=10.160.0.3:5701 -Dcom.fms.cache.group.name=fms_cache_cloud -Dhazelcast.application.validation.token=fms#123456" 		
-
+        volumeMounts:
+           - name: fms-build
+             mountPath: /usr/etc
+      volumes:
+           - name: fms-build
+             persistentVolumeClaim:
+               claimName: fms-pvc1
 
 # Create the Internal Service  
 # '---' by this syntex can create multile documants in yaml fle 
@@ -55,8 +61,22 @@ metadata:
 spec: # for deployment
   selector:
       app: fms-mng
-  type: NodePort    
+  type: LoadBalancer    
   ports:
      - protocol: TCP
        port: 9090
        targetPort: 9090
+ 
+ ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fms-pvc1
+  namespace: fms-app
+spec:
+  resources:
+    requests:
+      storage: 2Gi
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: "fms-stg-cls"
