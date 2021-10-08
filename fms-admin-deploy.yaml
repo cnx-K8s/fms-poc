@@ -67,7 +67,7 @@ spec: # for deployment
        port: 9090
        targetPort: 9090
 
----	   
+---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -78,6 +78,7 @@ parameters:
   fstype: ext4
 volumeBindingMode: WaitForFirstConsumer	   
 
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
