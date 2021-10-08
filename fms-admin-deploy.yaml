@@ -72,6 +72,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: fms-stg-cls
+  namespace: fms-app
 provisioner: kubernetes.io/gce-pd
 parameters:
   type: pd-standard
@@ -83,6 +84,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: fms-pvc
+  namespace: fms-app
 spec:
   resources:
     requests:
