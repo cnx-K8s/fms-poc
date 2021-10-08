@@ -29,11 +29,11 @@ spec: # for deployment
         image: 1017860556361/fms-admin:v5
         resources: 
           limits:
-            memory: "512Mi"  
-            cpu: "300m"
+            memory: "2048Mi"  
+            cpu: "1000m"
           requests:                   # request memory can't greater than limits memory
-            memory: "256Mi"  
-            cpu: "200m"
+            memory: "2048Mi"  
+            cpu: "1000m"
         ports:
          - containerPort: 9090
         env:
@@ -41,7 +41,13 @@ spec: # for deployment
             value: "mongodb://admin:fms135246@10.128.0.7:27017/admin?waitQueueTimeoutMS=180000&maxPoolSize=5000" 
           - name: CATALINA_OPTS 
             value: "-Dcom.fms.cache.address=10.160.0.3:5701 -Dcom.fms.cache.group.name=fms_cache_cloud -Dhazelcast.application.validation.token=fms#123456" 		
-
+		volumeMounts:
+		- name: fms-build
+		  mountPath: /etc
+	 volumes:
+	  - name: fms-build
+		persistentVolumeClaim:
+		  claimName: fms-pvc
 
 # Create the Internal Service  
 # '---' by this syntex can create multile documants in yaml fle 
@@ -60,3 +66,26 @@ spec: # for deployment
      - protocol: TCP
        port: 9090
        targetPort: 9090
+
+---	   
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fms-stg-cls
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-standard
+  fstype: ext4
+volumeBindingMode: WaitForFirstConsumer	   
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fms-pvc
+spec:
+  resources:
+    requests:
+      storage: 2Gi
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: "fms-stg-cls"
