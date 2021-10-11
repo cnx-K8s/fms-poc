@@ -64,7 +64,7 @@ spec: # for deployment
   type: LoadBalancer    
   ports:
      - protocol: TCP
-      port: 9090
+       port: 9090
        targetPort: 9090
 --- 
 apiVersion: v1
