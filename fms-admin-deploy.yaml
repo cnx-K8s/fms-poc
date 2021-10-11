@@ -53,19 +53,19 @@ spec: # for deployment
 # '---' by this syntex can create multile documants in yaml fle 
 
 ---    
-#apiVersion: v1
-#kind: Service
-#metadata:
-#  name: fms-admin-svc
-#  namespace: fms-app
-#spec: # for deployment
-#  selector:
-#     app: fms-admin
-#  type: LoadBalancer    
-#  ports:
-#     - protocol: TCP
-#      port: 9090
-#       targetPort: 9090
+apiVersion: v1
+kind: Service
+metadata:
+  name: fms-admin-svc
+  namespace: fms-app
+spec: # for deployment
+  selector:
+     app: fms-admin
+  type: LoadBalancer    
+  ports:
+     - protocol: TCP
+      port: 9090
+       targetPort: 9090
 --- 
 apiVersion: v1
 kind: PersistentVolume
