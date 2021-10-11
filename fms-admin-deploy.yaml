@@ -3,7 +3,7 @@ kind: Namespace
 metadata:
   name: fms-admin1
   labels:
-    name: fms-app
+    name: fms-admin1
 
 # Create the Pod
 ---
