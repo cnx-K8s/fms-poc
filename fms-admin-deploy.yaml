@@ -78,8 +78,8 @@ spec:
   accessModes:
   - ReadWriteMany
   nfs:
-    path: /fms
-    server: 10.30.51.122  
+    path: /fms/build
+    server: 10.224.135.74  
 
 --- 
 apiVersion: v1
