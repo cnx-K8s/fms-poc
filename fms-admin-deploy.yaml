@@ -78,7 +78,7 @@ spec:
   accessModes:
   - ReadWriteMany
   nfs:
-    path: /fms/build
+    path: /fms
     server: 10.224.135.74  
 
 --- 
