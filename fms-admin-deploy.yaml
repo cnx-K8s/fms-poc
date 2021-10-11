@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: fms-app
+  name: fms-admin1
   labels:
     name: fms-app
 
@@ -11,7 +11,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: fms-admin-deploy
-  namespace: fms-app
+  namespace: fms-admin1
   labels:
     app: fms-admin
 spec: # for deployment
@@ -30,10 +30,10 @@ spec: # for deployment
         resources: 
           limits:
             memory: "2048Mi"  
-            cpu: "500m"
+            cpu: "1000m"
           requests:                   # request memory can't greater than limits memory
             memory: "2048Mi"  
-            cpu: "300m"
+            cpu: "1000m"
         ports:
          - containerPort: 9090
         env:
@@ -53,25 +53,25 @@ spec: # for deployment
 # '---' by this syntex can create multile documants in yaml fle 
 
 ---    
-apiVersion: v1
-kind: Service
-metadata:
-  name: fms-admin-svc
-  namespace: fms-app
-spec: # for deployment
-  selector:
-      app: fms-admin
-  type: LoadBalancer    
-  ports:
-     - protocol: TCP
-       port: 9090
-       targetPort: 9090
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: fms-admin-svc
+#  namespace: fms-app
+#spec: # for deployment
+#  selector:
+#     app: fms-admin
+#  type: LoadBalancer    
+#  ports:
+#     - protocol: TCP
+#      port: 9090
+#       targetPort: 9090
 --- 
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: fileserver
-  namespace: fms-app
+  namespace: fms-admin1
 spec:
   capacity:
     storage: 5Gi
@@ -86,7 +86,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: fileserver-claim
-  namespace: fms-app
+  namespace: fms-admin1
 spec:
   accessModes:
   - ReadWriteMany
