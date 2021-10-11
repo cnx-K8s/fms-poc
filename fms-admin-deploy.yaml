@@ -29,10 +29,10 @@ spec: # for deployment
         image: 1017860556361/fms-admin:v4.2
         resources: 
           limits:
-            memory: "4096Mi"  
-            cpu: "500m"
+            memory: "2048Mi"  
+            cpu: "300m"
           requests:                   # request memory can't greater than limits memory
-            memory: "4096Mi"  
+            memory: "2048Mi"  
             cpu: "300m"
         ports:
          - containerPort: 9090
