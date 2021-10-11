@@ -79,7 +79,7 @@ spec:
   - ReadWriteMany
   nfs:
     path: /fms
-    server: 10.224.135.74  
+    server: 10.196.151.194  
 
 --- 
 apiVersion: v1
