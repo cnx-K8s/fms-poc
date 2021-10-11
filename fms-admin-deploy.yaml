@@ -30,10 +30,10 @@ spec: # for deployment
         resources: 
           limits:
             memory: "4096Mi"  
-            cpu: "1000m"
+            cpu: "500m"
           requests:                   # request memory can't greater than limits memory
             memory: "4096Mi"  
-            cpu: "1000m"
+            cpu: "300m"
         ports:
          - containerPort: 9090
         env:
