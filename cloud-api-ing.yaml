@@ -8,7 +8,10 @@ spec:
   rules:
   - http:
       paths:
-      - path: /*
+      - path: /api/*
+        pathType: ImplementationSpecific
         backend:
-          serviceName: cloud-api-basic-svc
-          servicePort: 8080
+          service:
+            name: cloud-api-basic-svc
+            port:
+              number: 8080
