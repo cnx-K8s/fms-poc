@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloud-api-basic-deploy
+  namespace: fms-admin1
+  labels:
+    app: cloud-api-basic
+spec: # for deployment
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cloud-api-basic
+  template:
+    metadata:
+      labels:
+        app: cloud-api-basic
+    spec: # for pod
+      containers:
+      - image: 1017860556361/api-basic:v3
+        name: cloud-api-basic
+        ports:
+         - containerPort: 8080
+        livenessProbe:
+          httpGet:
+             path: /api
+             port: 8080
+        readinessProbe:
+          httpGet:
+             path: /api
+             port: 8080 
+        
+# Create the Eeternal Service  
+# '---' by this syntex can create multile documants in yaml fle 
+
+---    
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloud-api-basic-svc
+  namespace: fms-admin1
+spec: 
+  selector:
+      app: cloud-api-basic
+  #type: NodePort #LoadBalancer     
+  ports:
+     - protocol: TCP
+       port: 8080
+       targetPort: 8080
+         
