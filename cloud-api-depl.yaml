@@ -41,7 +41,7 @@ metadata:
 spec: 
   selector:
       app: cloud-api-basic
-  type: NodePort #LoadBalancer     
+  #type: NodePort #LoadBalancer     
   ports:
      - protocol: TCP
        port: 8080
