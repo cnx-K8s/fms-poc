@@ -48,7 +48,7 @@ spec: # for deployment
              port: 9090
         startupProbe:
           httpGet:
-             path: /healthz
+             path: /fms_adminweb
              port: liveness-port
           failureThreshold: 30
           periodSeconds: 10     
