@@ -20,6 +20,14 @@ spec: # for deployment
         name: cloud-api-basic
         ports:
          - containerPort: 8080
+    livenessProbe:
+          httpGet:
+             path: /api
+             port: 8080
+    readinessProbe:
+          httpGet:
+             path: /api
+             port: 8080
         
 # Create the Eeternal Service  
 # '---' by this syntex can create multile documants in yaml fle 
