@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloud-api-basic-deploy
+  namespace: cloud-api-ns
+  labels:
+    app: cloud-api-basic
+spec: # for deployment
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cloud-api-basic
+  template:
+    metadata:
+      labels:
+        app: cloud-api-basic
+    spec: # for pod
+      containers:
+      - image: 1017860556361/api-basic:v3
+        name: cloud-api-basic
+        ports:
+         - containerPort: 8080
+        
+# Create the Eeternal Service  
+# '---' by this syntex can create multile documants in yaml fle 
+
+---    
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloud-api-basic-svc
+  namespace: cloud-api-ns
+spec: 
+  selector:
+      app: cloud-api-basic
+  #type: LoadBalancer     
+  ports:
+     - protocol: TCP
+       port: 8080
+       targetPort: 8080
+         
