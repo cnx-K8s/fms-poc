@@ -4,7 +4,7 @@ metadata:
   name: fms-ing
   annotations:
     kubernetes.io/ingress.class: gce
-     kubernetes.io/ingress.global-static-ip-name: fms-dev
+    kubernetes.io/ingress.global-static-ip-name: fms-dev
 spec:
   rules:
   - http:
