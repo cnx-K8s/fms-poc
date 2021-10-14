@@ -23,4 +23,4 @@ spec:
           service:
             name: fms-admin-svc
             port:
-              number: 9090              
+              number: 9090
