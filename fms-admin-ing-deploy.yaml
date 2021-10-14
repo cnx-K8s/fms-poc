@@ -40,10 +40,18 @@ spec: # for deployment
           httpGet:
              path: /fms_adminweb
              port: 9090
+          failureThreshold: 5
+          periodSeconds: 10
         readinessProbe:
           httpGet:
              path: /fms_adminweb
-             port: 9090         
+             port: 9090
+        startupProbe:
+          httpGet:
+             path: /healthz
+             port: liveness-port
+          failureThreshold: 30
+          periodSeconds: 10     
         env:
           - name: com.fms.uri 
             value: "mongodb://admin:fms135246@10.128.0.7:27017/admin?waitQueueTimeoutMS=180000&maxPoolSize=5000" 
