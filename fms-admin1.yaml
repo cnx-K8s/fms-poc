@@ -1,0 +1,97 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fms-admin1
+  labels:
+    name: fms-admin1
+
+# Create the Pod
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fms-admin-deploy
+  namespace: fms-admin1
+  labels:
+    app: fms-admin
+spec: # for deployment
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fms-admin
+  template:
+    metadata:
+      labels:
+        app: fms-admin
+    spec: # for pod
+      containers:
+      - name: fms-admin
+        image: 1017860556361/fms-admin:v4.2
+        resources: 
+          limits:
+            memory: "2048Mi"  
+            cpu: "300m"
+          requests:                   # request memory can't greater than limits memory
+            memory: "2048Mi"  
+            cpu: "300m"
+        ports:
+         - containerPort: 9090      
+        env:
+          - name: com.fms.uri 
+            value: "mongodb://admin:fms135246@10.128.0.7:27017/admin?waitQueueTimeoutMS=180000&maxPoolSize=5000" 
+          - name: CATALINA_OPTS 
+            value: "-Dcom.fms.cache.address=10.160.0.3:5701 -Dcom.fms.cache.group.name=fms_cache_cloud -Dhazelcast.application.validation.token=fms#123456"     
+        volumeMounts:
+           - name: fms-build
+             mountPath: /usr/local/tomcat/temp/
+      volumes:
+           - name: fms-build
+             persistentVolumeClaim:
+               claimName: fileserver-claim
+
+# Create the Internal Service  
+# '---' by this syntex can create multile documants in yaml fle 
+
+---    
+apiVersion: v1
+kind: Service
+metadata:
+  name: fms-admin-svc
+  namespace: fms-admin1
+spec: # for deployment
+  selector:
+     app: fms-admin
+  #type: LoadBalancer    
+  ports:
+     - protocol: TCP
+       port: 9090
+       targetPort: 9090
+--- 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: fileserver
+  namespace: fms-admin1
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+  - ReadWriteMany
+  nfs:
+    path: /fms
+    server: 10.196.151.194  
+
+--- 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fileserver-claim
+  namespace: fms-admin1
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: ""
+  volumeName: fileserver
+  resources:
+    requests:
+      storage: 2Gi  
