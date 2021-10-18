@@ -5,18 +5,11 @@ metadata:
   namespace: fms-admin1
   annotations:
     kubernetes.io/ingress.class: gce
-    kubernetes.io/ingress.global-static-ip-name: fms-lb-ipv4-1
+    kubernetes.io/ingress.global-static-ip-name: fms-dev
 spec:
   rules:
   - http:
       paths:
-      - path: /api/*
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: cloud-api-basic-svc
-            port:
-              number: 8080
       - path: /fms_adminweb/*
         pathType: ImplementationSpecific
         backend:
