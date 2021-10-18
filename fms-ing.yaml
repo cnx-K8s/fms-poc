@@ -16,11 +16,4 @@ spec:
           service:
             name: fms-ge-svc
             port:
-              number: 9090
-      - path: /fms_adminweb/*
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: fms-admin-svc
-            port:
-              number: 9090              
+              number: 9090             
