@@ -16,18 +16,18 @@ spec: # for deployment
         app: cloud-api-basic
     spec: # for pod
       containers:
-      - image: 1017860556361/api-basic:v3
+      - image: 1017860556361/api:v0
         name: cloud-api-basic
         ports:
-         - containerPort: 8080
+         - containerPort: 9090
         livenessProbe:
           httpGet:
              path: /api
-             port: 8080
+             port: 9090
         readinessProbe:
           httpGet:
              path: /api
-             port: 8080 
+             port: 9090 
         
 # Create the Eeternal Service  
 # '---' by this syntex can create multile documants in yaml fle 
@@ -44,6 +44,6 @@ spec:
   #type: NodePort #LoadBalancer     
   ports:
      - protocol: TCP
-       port: 8080
-       targetPort: 8080
+       port: 9090
+       targetPort: 9090
          
