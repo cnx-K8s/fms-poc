@@ -36,6 +36,16 @@ spec: # for deployment
             cpu: "200m"
         ports:
          - containerPort: 9090
+        livenessProbe:
+          httpGet:
+             path: /fms_ge/rest/test
+             port: 9090
+          failureThreshold: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+             path: /fms_ge/rest/test
+             port: 9090         
         env:
           - name: com.fms.uri 
             value: "mongodb://admin:fms135246@10.128.0.7:27017/admin?waitQueueTimeoutMS=180000&maxPoolSize=5000" 
