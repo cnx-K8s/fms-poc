@@ -15,4 +15,4 @@ spec:
           service:
             name: cloud-api-basic-svc
             port:
-              number: 8080
+              number: 9090
