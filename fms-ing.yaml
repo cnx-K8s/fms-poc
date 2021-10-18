@@ -10,10 +10,10 @@ spec:
   rules:
   - http:
       paths:
-      - path: /fms_adminweb/*
+      - path: /fms_ge/*
         pathType: ImplementationSpecific
         backend:
           service:
-            name: fms-admin-svc
+            name: fms-ge-svc
             port:
               number: 9090
