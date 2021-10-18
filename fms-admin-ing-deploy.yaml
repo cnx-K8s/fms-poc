@@ -38,17 +38,17 @@ spec: # for deployment
          - containerPort: 9090  
         livenessProbe:
           httpGet:
-             path: /fms_adminweb/
+             path: /fms_adminweb/styles/applicationstyles.css
              port: 9090
           failureThreshold: 5
           periodSeconds: 10
         readinessProbe:
           httpGet:
-             path: /fms_adminweb/
+             path: /fms_adminweb/styles/applicationstyles.css
              port: 9090
         startupProbe:
           httpGet:
-             path: /fms_adminweb/
+             path: /fms_adminweb/styles/applicationstyles.css
              port: 9090
           failureThreshold: 30
           periodSeconds: 10     
