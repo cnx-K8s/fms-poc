@@ -45,7 +45,13 @@ spec: # for deployment
         readinessProbe:
           httpGet:
              path: /fms_ge/rest/test
-             port: 9090         
+             port: 9090 
+        startupProbe:
+          httpGet:
+             path: /fms_ge/rest/test
+             port: 9090
+          failureThreshold: 30
+          periodSeconds: 10              
         env:
           - name: com.fms.uri 
             value: "mongodb://admin:fms135246@10.128.0.7:27017/admin?waitQueueTimeoutMS=180000&maxPoolSize=5000" 
